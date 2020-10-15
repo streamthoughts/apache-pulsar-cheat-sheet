@@ -95,7 +95,19 @@ $ pulsar-admin persistent reset-cursor persistent://public/default/cheat_sheet_t
 
 == Client API
 
-=== Create basic PulsarClient
+=== Dependencies
+
+==== Java (using Maven)
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.pulsar</groupId>
+  <artifactId>pulsar-client</artifactId>
+  <version>${pulsar.version}</version>
+</dependency>
+----
+
+=== Client: Create basic PulsarClient
 
 ==== Java
 
@@ -280,6 +292,31 @@ public void resetSubscriptionOffsetsTo(final Consumer<?> consumer,
 ----
 
 __Note: this operation can only be done on non-partitioned topics.__
+
+== Admin API
+
+=== Dependencies
+
+==== Java (using Maven)
+[source,xml]
+----
+<dependency>
+    <groupId>org.apache.pulsar</groupId>
+    <artifactId>pulsar-client-admin</artifactId>
+    <version>${pulsar.version}</version>
+</dependency>
+----
+
+=== Client: Create basic PulsarAdmin
+
+==== Java
+[source,java]
+----
+PulsarAdmin admin = PulsarAdmin
+        .builder()
+        .serviceHttpUrl("pulsar://localhost:6650")
+        .build();
+----
 
 == License
 This work is licensed under a http://creativecommons.org/licenses/by-sa/4.0["Creative Commons Attribution-ShareAlike 4.0 International License"].
