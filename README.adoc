@@ -137,6 +137,7 @@ Producer<String> producer = client.newProducer(Schema.STRING)
 ----
 Producer<String> producer = client.newProducer(Schema.STRING)
     .topic("cheat_sheet_topic")
+    .hashingScheme(HashingScheme.Murmur3_32Hash) // default is Java.hashCode()
     .messageRoutingMode(MessageRoutingMode.RoundRobinPartition)
     .create();
 ----
@@ -151,6 +152,7 @@ If no key is provided on the message, the producer will randomly pick one single
 ----
 Producer<String> producer = client.newProducer(Schema.STRING)
     .topic("cheat_sheet_topic")
+    .hashingScheme(HashingScheme.Murmur3_32Hash) // default is Java.hashCode()
     .messageRoutingMode(MessageRoutingMode.SinglePartition)
     .create();
 ----
@@ -187,6 +189,8 @@ Producer<String> producer = client.newProducer(Schema.STRING)
     .blockIfQueueFull(true)
     .sendTimeout(30, TimeUnit.SECONDS)
     .compressionType(CompressionType.ZSTD)
+    .batcherBuilder(BatcherBuilder.KEY_BASED)
+    .hashingScheme(HashingScheme.Murmur3_32Hash)
     .create();
 ----
 
