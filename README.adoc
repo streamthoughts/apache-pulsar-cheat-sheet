@@ -307,15 +307,72 @@ __Note: this operation can only be done on non-partitioned topics.__
 </dependency>
 ----
 
-=== Client: Create basic PulsarAdmin
+=== Admin: Create basic PulsarAdmin
 
 ==== Java
 [source,java]
 ----
 PulsarAdmin admin = PulsarAdmin
         .builder()
-        .serviceHttpUrl("pulsar://localhost:6650")
+        .serviceHttpUrl("http://localhost:8080")
         .build();
+----
+
+=== Admin: Check if topic exists
+
+==== Java
+[source,java]
+----
+public boolean topicExists(final PulsarAdmin admin,
+                           final String topicName) throws PulsarAdminException {
+    int partitionNum = admin.topics().getPartitionedTopicMetadata(topicName).partitions;
+    if (partitionNum == 0) {
+        try {
+            admin.topics().getStats(topicName);
+        } catch (PulsarAdminException.NotFoundException e) {
+            return false;
+        }
+    }
+    return true;
+}
+----
+
+=== Admin: Check if topic is partitioned
+
+==== Java
+[source,java]
+----
+public boolean isTopicPartitioned(final PulsarAdmin admin, final String topicName) throws PulsarAdminException {
+    return admin.topics().getPartitionedTopicMetadata(topicName).partitions > 0;
+}
+----
+
+=== Admin: Create topic
+
+==== Java
+[source,java]
+----
+public void createTopic(final PulsarAdmin admin,
+                        final String topicName,
+                        final int defaultPartitionNum) throws PulsarAdminException {
+    if (defaultPartitionNum > 0)
+        admin.topics().createPartitionedTopic(topicName, defaultPartitionNum);
+    else
+        admin.topics().createNonPartitionedTopic(topicName);
+}
+----
+
+=== Admin: Delete a topic
+
+==== Java
+[source,java]
+----
+public void deleteTopic(final PulsarAdmin admin, final String topicName) throws PulsarAdminException {
+    if (isTopicPartitioned(admin, topic))
+        admin.topics().deletePartitionedTopic(topicName, true);
+    else
+        admin.topics().delete(topicName, true);
+}
 ----
 
 == License
