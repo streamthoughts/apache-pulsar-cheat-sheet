@@ -2,8 +2,6 @@
 :toc:
 :toc-placement!:
 
-image::https://i.creativecommons.org/l/by-sa/4.0/88x31.png[http://creativecommons.org/licenses/by-sa/4.0/]
-
 This cheat sheet is filled with some handy tips, commands and code snippets to get you streaming data using Apache Pulsar in no time!
 
 Of course, this list isn't exhaustive at all. But contributing to this project is easy! Just send a pull request and make the list growth! Any feedback and bug reports are also greatly appreciated!
@@ -380,4 +378,10 @@ public void deleteTopic(final PulsarAdmin admin, final String topicName) throws 
 ----
 
 == License
-This work is licensed under a http://creativecommons.org/licenses/by-sa/4.0["Creative Commons Attribution-ShareAlike 4.0 International License"].
+Copyright 2020 StreamThoughts.
+
+Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE file distributed with this work for additional information regarding copyright ownership. The ASF licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
